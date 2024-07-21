@@ -3,41 +3,28 @@ import Navbar from "./component/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Songs from "./component/Songs";
 import Playlist from "./component/Playlist";
-import { useState } from "react";
+import usePlaylistManager from './component/hooks/usePlaylistManager';
+
 
 function App() {
-  const songs = [
-    { id: 1, title: "song1" },
-    { id: 2, title: "song2" },
-    { id: 3, title: "song3" },
-    { id: 4, title: "song4" },
-    { id: 5, title: "song5" },
-  ];
 
-  const initialPlaylists = [
-    { id: 1, name: "My Playlist 1", songCount: 0 },
-    { id: 2, name: "My Playlist 2", songCount: 0 },
-    { id: 3, name: "My Playlist 3", songCount: 0 },
-  ];
+  const {
+    songs,
+    playlists,
+    isLoading,
+    error,
+    handleCreatePlaylist,
+    handleAddSongToPlaylist,
+    handleDeletePlaylist,
+  } = usePlaylistManager();
 
-  const [playlists, setPlaylists] = useState(initialPlaylists);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const handleCreatePlaylist = (newPlaylistName) => {
-    const newPlaylist = {
-      id: playlists.length + 1,
-      name: newPlaylistName,
-    };
-    setPlaylists((prevPlaylists) => [...prevPlaylists, newPlaylist]);
-  };
-
-  const handleAddSongToPlaylist = (playlistId) => {
-    playlists.map((playlist) => {
-      if (playlist.id === playlistId) {
-        playlist.songCount = playlist.songCount+1;
-      }
-    });
-    setPlaylists(playlists);
-  };
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <BrowserRouter>
@@ -60,6 +47,7 @@ function App() {
               songs={songs}
               playlists={playlists}
               handleCreatePlaylist={handleCreatePlaylist}
+              deletePlaylist={handleDeletePlaylist}
             />
           }
         />

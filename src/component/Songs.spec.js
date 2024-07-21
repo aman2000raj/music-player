@@ -7,11 +7,11 @@ import PlaylistDialog from "./PlaylistDialog";
 
 describe("Songs Component", () => {
   const songs = [
-    { id: 1, title: "song1" },
-    { id: 2, title: "song2" },
-    { id: 3, title: "song3" },
-    { id: 4, title: "song4" },
-    { id: 5, title: "song5" },
+    { id: 1, name: "song1" },
+    { id: 2, name: "song2" },
+    { id: 3, name: "song3" },
+    { id: 4, name: "song4" },
+    { id: 5, name: "song5" },
   ];
 
   const playlists = [
@@ -25,7 +25,7 @@ describe("Songs Component", () => {
   });
 
   it("renders song titles with add to playlist buttons", () => {
-    expect(screen.getByText("song1")).toBeInTheDocument();
+    expect(screen.queryByText("song1")).toBeInTheDocument();
     expect(screen.getAllByText("Add to playlist")[0]).toBeInTheDocument();
   });
 

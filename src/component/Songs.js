@@ -18,7 +18,7 @@ function Songs({ songs, playlists, handleAddSongToPlaylist }) {
   };
 
   const handleAddToSelectedPlaylist = (playlistId) => {
-    handleAddSongToPlaylist(playlistId);
+    handleAddSongToPlaylist(playlistId, selectedSongId);
     handleCloseDialog();
   };
 
@@ -40,7 +40,7 @@ function Songs({ songs, playlists, handleAddSongToPlaylist }) {
             minHeight: "48px",
           }}
         >
-          {song.title}{" "}
+          {song.name}{" "}
           <Button
             variant="contained"
             size="small"

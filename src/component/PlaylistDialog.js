@@ -40,7 +40,7 @@ function PlaylistDialog({
               variant="outlined"
               sx={{ my: 1 }}
             >
-              {playlist.name}
+              {playlist.playlistName}
             </Button>
           </div>
         ))}
